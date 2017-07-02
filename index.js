@@ -1,8 +1,8 @@
 /**
- * Main class Message
- * @author Jose Berardo Cunha
- * @since 25/01/2017
- */
+* Main class Message
+* @author Jose Berardo Cunha
+* @since 25/01/2017
+*/
 class Message {
   constructor(text = '', created = Date.now()) {
     this.text = text;
@@ -15,7 +15,7 @@ class Message {
     if (typeof created === 'undefined' || isNaN(created)) {
       throw new Error('Invalid created');
     }
-    if (this.hasOwnProperty('_created')) {
+    if (Message.prototype.hasOwnProperty.call(this, '_created')) {
       throw new Error('Created already defined');
     }
     this._created = created;
@@ -29,32 +29,32 @@ class Message {
 }
 
 /**
- * Inheritance example
- * @extends {Message}
- */
+* Inheritance example
+* @extends {Message}
+*/
 class ImageMessage extends Message {
   constructor(text = '', created = Date.now(),
-              url = '', thumbnail = '') {
+    url = '', thumbnail = '') {
     super(text, created);
     this.url = url;
     this.thumbnail = thumbnail;
   }
 
   /**
-   * Method overriden
-   * @returns String
-   */
+  * Method overriden
+  * @returns String
+  */
   toString() {
     return `Photo${super.toString()} ` +
-           `- Url: ${this.url} ` +
-           `- Thumbnail: ${this.thumbnail}`;
+      `- Url: ${this.url} ` +
+      `- Thumbnail: ${this.thumbnail}`;
   }
 }
 
 // Message instances
-var emptyMessage = Message.newEmptyMessage();
-var textMessage = new Message('Yesterday message', Date.now() - 86400);
-var photoMessage = new ImageMessage();
+const emptyMessage = Message.newEmptyMessage();
+const textMessage = new Message('Yesterday message', Date.now() - 86400);
+const photoMessage = new ImageMessage();
 
 // Printing objects
 console.log(emptyMessage);
@@ -64,11 +64,11 @@ console.log(String(photoMessage));
 console.log(new Date(textMessage.created).toString());
 
 // Property shorthand
-var text = 'Some text';
-var created = Date.now();
-var duckTypeMessage = {
+const text = 'Some text';
+const created = Date.now();
+const duckTypeMessage = {
   text,
-  created
+  created,
 };
 console.log(duckTypeMessage);
 
