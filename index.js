@@ -16,8 +16,8 @@ class MessagesService {
         rejectPromise(err);
       } else {
         const dataArray = JSON.parse(data);
-        const dataObj = dataArray.map(item => new Message(item.text,
-          item.created));
+        const dataObj = dataArray.map(item =>
+          new Message(item.text, item.created));
         resolvePromise(dataObj);
       }
     });
@@ -29,6 +29,7 @@ class MessagesService {
 }
 
 const messagesService = new MessagesService();
+
 messagesService.messages.then((messages) => {
   messages.forEach((message) => {
     console.log(String(message));
